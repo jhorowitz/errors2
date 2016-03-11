@@ -22,5 +22,5 @@ func (e *Error) Error() string {
 }
 
 func NewFailedError(reason string) *Error {
-	return &Error{failureReason: reason, failed:true}
+	return &Error{failureReason: reason, failed: true}
 }

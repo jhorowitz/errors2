@@ -1,12 +1,12 @@
 package errors2
 
 import (
-	"time"
 	"fmt"
+	"time"
 )
 
 type FunctionTimer struct {
-	FunctionName string
+	functionName string
 	startTime    time.Time
 	endTime      time.Time
 	started      bool
@@ -27,20 +27,21 @@ func (f *FunctionTimer) Duration() (duration time.Duration, err error) {
 }
 
 func (f *FunctionTimer) Report() (report string) {
-	if len(f.FunctionName) == 0 {
-		f.FunctionName = "anonymous"
+	if len(f.functionName) == 0 {
+		f.functionName = "anonymous"
 	}
 	if !f.started {
 		return "FunctionTiming was never started."
 	}
 	if !f.ended {
-		return fmt.Sprintf("FunctionTiming was never completed for %s. It's been %s since it started.", f.FunctionName, time.Since(f.startTime).String())
+		return fmt.Sprintf("FunctionTiming was never completed for %s. It's been %s since it started.", f.functionName, time.Since(f.startTime).String())
 	}
-	report += fmt.Sprintf("[%s]: completed in %s", f.FunctionName, f.endTime.Sub(f.startTime).String())
+	report += fmt.Sprintf("[%s]: completed in %s", f.functionName, f.endTime.Sub(f.startTime).String())
 	return
 }
 
-func (f *FunctionTimer) Begin() {
+func (f *FunctionTimer) Begin(name string) {
+	f.functionName = name
 	f.started = true
 	f.startTime = time.Now()
 }
