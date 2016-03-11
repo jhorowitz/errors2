@@ -56,18 +56,18 @@ type Error struct {
 	failed        bool
 }
 
-func (e Error) Fail(reason string) {
+func (e *Error) Fail(reason string) {
 	e.failed = true
 	e.failureReason = reason
 }
 
-func (e Error) ToError() error {
+func (e *Error) ToError() error {
 	if !e.failed {
 		return nil
 	}
 	return e
 }
 
-func (e Error) Error() string {
+func (e *Error) Error() string {
 	return e.failureReason
 }
