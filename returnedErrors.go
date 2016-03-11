@@ -1,7 +1,12 @@
 package errors2
 
-const prepend = "errors2: "
 
-var FunctionTimingNeverStarted = (&Error{failureReason: prepend + "The timer was never started.", failed:true}).ToError()
-var FunctionTimingNeverCompleted = (&Error{failureReason: prepend + "The timer is still running..", failed:true}).ToError()
+func newFailedInternalError(reason string) *Error {
+	const prepend = "errors2: "
+	return NewFailedError(prepend + reason)
+}
 
+var (
+	FunctionTimingNeverStarted = newFailedInternalError("The timer was never started.").ToError()
+	FunctionTimingNeverCompleted = newFailedInternalError("The timer is still running..").ToError()
+)

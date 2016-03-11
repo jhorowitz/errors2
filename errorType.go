@@ -71,3 +71,7 @@ func (e *Error) ToError() error {
 func (e *Error) Error() string {
 	return e.failureReason
 }
+
+func NewFailedError(reason string) *Error {
+	return &Error{failureReason: reason, failed:true}
+}
