@@ -23,7 +23,11 @@ func (f *FunctionTimer) Duration() (duration time.Duration, err error) {
 		duration = f.endTime.Sub(f.startTime)
 		return
 	}
-	err = FunctionTimingNeverStarted
+	if !f.started {
+		err = FunctionTimingNeverStarted
+	} else if !f.ended {
+		err = FunctionTimingNeverCompleted
+	}
 	return
 }
 
