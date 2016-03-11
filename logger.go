@@ -20,7 +20,7 @@ type logMessage struct {
 
 type Logger struct {
 	messages []*logMessage
-	Timer    FunctionTimer
+	Timer    Timer
 }
 
 func (l *Logger) Debug(message string) {

@@ -8,9 +8,9 @@ import (
 func TestTimerFunctionality(t *testing.T) {
 	const waitDuration = time.Millisecond * 10
 	t.Log("TestTimerFunctionality")
-	ft := &FunctionTimer{}
+	ft := &Timer{}
 	func() {
-		ft.Begin("Blah")
+		ft.Begin()
 		defer ft.Complete()
 		time.Sleep(1 * waitDuration)
 	}()
